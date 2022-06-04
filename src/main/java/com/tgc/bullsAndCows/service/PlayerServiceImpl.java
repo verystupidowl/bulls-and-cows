@@ -22,7 +22,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player findPlayer(int id) {
-        System.out.println(playerRepository.getReferenceById(1));
-        return playerRepository.getReferenceById(id);
+        System.out.println(playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null));
+        return playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
     }
 }
