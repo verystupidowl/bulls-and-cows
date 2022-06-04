@@ -3,6 +3,7 @@ package com.tgc.bullsAndCows.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -16,5 +17,7 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String surname;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    @ToString.Exclude
+    private List<Step> steps;
 }

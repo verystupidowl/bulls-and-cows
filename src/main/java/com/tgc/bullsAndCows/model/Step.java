@@ -1,20 +1,14 @@
 package com.tgc.bullsAndCows.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Step {
 
     @Id
@@ -22,4 +16,13 @@ public class Step {
     private int id;
     private int cows;
     private int bulls;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PERSON_ID")
+    private Player player;
+
+    public Step(int cows, int bulls) {
+        this.bulls = bulls;
+        this.cows = cows;
+    }
 }

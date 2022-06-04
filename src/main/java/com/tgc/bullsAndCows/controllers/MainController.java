@@ -6,6 +6,8 @@ import com.tgc.bullsAndCows.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/game")
 @CrossOrigin("http://localhost:3000/")
@@ -28,5 +30,10 @@ public class MainController {
     @GetMapping("/getPlayer{id}")
     public Player getPlayer(@PathVariable int id) {
         return playerService.findPlayer(id);
+    }
+
+    @GetMapping("/getAllPlayers")
+    public List<Player> getAllPlayers() {
+        return playerService.getAllPlayers();
     }
 }
