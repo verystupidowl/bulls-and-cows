@@ -6,7 +6,7 @@ import com.tgc.bullsAndCows.model.Step;
 import java.util.List;
 
 public interface PlayerService {
-    void savePlayer(Player player);
+    Player savePlayer(Player player);
     Player findPlayer(int id);
     List<Player> getAllPlayers();
     Player deletePlayer(int id);

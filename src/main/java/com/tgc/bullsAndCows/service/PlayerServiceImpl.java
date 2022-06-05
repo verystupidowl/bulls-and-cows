@@ -6,7 +6,6 @@ import com.tgc.bullsAndCows.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,12 +19,19 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void savePlayer(Player player) {
-        List<Step> steps = new ArrayList<>();
-        steps.add(new Step(1, 2));
-        player.setSteps(steps);
-        System.out.println(player);
-        playerRepository.save(player);
+    public Player savePlayer(Player player) {
+        Player player1 = playerRepository.findAll().stream()
+                .filter(p -> p.getName().equals(player.getName()))
+                .findAny()
+                .orElse(null);
+        if (player1 == null) {
+            playerRepository.save(player);
+            return player;
+        } else {
+            System.out.println(player);
+            playerRepository.save(player1);
+            return player1;
+        }
     }
 
     @Override

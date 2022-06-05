@@ -22,10 +22,10 @@ public class MainController {
     }
 
     @PostMapping("/addPlayer")
-    public String savePlayer(@RequestBody Player player) {
-        playerService.savePlayer(player);
-        System.out.println(player);
-        return "new player has been added";
+    public Player addNewPlayer(@RequestBody Player player) {
+        Player returnPlayer = playerService.savePlayer(player);
+        System.out.println(returnPlayer);
+        return returnPlayer;
     }
 
     @GetMapping("/getPlayer{id}")
