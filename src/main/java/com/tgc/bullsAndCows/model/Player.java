@@ -17,7 +17,11 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    @OneToMany(cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Step> steps;
+
+    public void addStep(Step step) {
+        steps.add(step);
+    }
 }

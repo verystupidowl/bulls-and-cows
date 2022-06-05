@@ -2,6 +2,7 @@ package com.tgc.bullsAndCows.controllers;
 
 
 import com.tgc.bullsAndCows.model.Player;
+import com.tgc.bullsAndCows.model.Step;
 import com.tgc.bullsAndCows.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +36,16 @@ public class MainController {
     @GetMapping("/getAllPlayers")
     public List<Player> getAllPlayers() {
         return playerService.getAllPlayers();
+    }
+
+    @PostMapping("/deletePlayer{id}")
+    public Player deletePlayer(@PathVariable int id) {
+        return playerService.deletePlayer(id);
+    }
+
+    @PostMapping("/addStepToPlayer{playerId}")
+    public String addStepToPlayer(@PathVariable int playerId, @RequestBody Step step) {
+        playerService.addStep(playerId, step);
+        return "new step for player has been added";
     }
 }

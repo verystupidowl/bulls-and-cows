@@ -22,9 +22,8 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public void savePlayer(Player player) {
         List<Step> steps = new ArrayList<>();
-        steps.add(new Step(1,2));
+        steps.add(new Step(1, 2));
         player.setSteps(steps);
-        steps.get(0).setPlayer(player);
         System.out.println(player);
         playerRepository.save(player);
     }
@@ -38,5 +37,23 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public List<Player> getAllPlayers() {
         return playerRepository.findAll();
+    }
+
+    @Override
+    public Player deletePlayer(int id) {
+        Player deletedPlayer = playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
+        System.out.println(deletedPlayer);
+        assert deletedPlayer != null;
+        playerRepository.delete(deletedPlayer);
+        return deletedPlayer;
+    }
+
+    @Override
+    public void addStep(int id, Step step) {
+        Player player = playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
+        System.out.println(player);
+        assert player != null;
+        player.addStep(step);
+        playerRepository.save(player);
     }
 }
