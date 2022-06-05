@@ -18,10 +18,10 @@ public class Player {
     private int id;
     private String name;
     @OneToMany(cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private List<Step> steps;
+    @JoinColumn(name = "player_id")
+    private List<Game> games;
 
-    public void addStep(Step step) {
-        steps.add(step);
+    public void addStep(Game game) {
+        games.add(game);
     }
 }

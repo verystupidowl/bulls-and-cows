@@ -1,7 +1,7 @@
 package com.tgc.bullsAndCows.service;
 
 import com.tgc.bullsAndCows.model.Player;
-import com.tgc.bullsAndCows.model.Step;
+import com.tgc.bullsAndCows.model.Game;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ public interface PlayerService {
     Player findPlayer(int id);
     List<Player> getAllPlayers();
     Player deletePlayer(int id);
-    void addStep(int id, Step step);
+    void addGame(int id, Game game);
 }

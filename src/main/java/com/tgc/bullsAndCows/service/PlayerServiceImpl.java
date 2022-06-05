@@ -1,11 +1,12 @@
 package com.tgc.bullsAndCows.service;
 
 import com.tgc.bullsAndCows.model.Player;
-import com.tgc.bullsAndCows.model.Step;
+import com.tgc.bullsAndCows.model.Game;
 import com.tgc.bullsAndCows.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,7 +29,7 @@ public class PlayerServiceImpl implements PlayerService {
             playerRepository.save(player);
             return player;
         } else {
-            System.out.println(player);
+            player1.addStep(new Game(22, 2222222));
             playerRepository.save(player1);
             return player1;
         }
@@ -36,7 +37,6 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player findPlayer(int id) {
-        System.out.println(playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null));
         return playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
     }
 
@@ -48,18 +48,16 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Player deletePlayer(int id) {
         Player deletedPlayer = playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
-        System.out.println(deletedPlayer);
         assert deletedPlayer != null;
         playerRepository.delete(deletedPlayer);
         return deletedPlayer;
     }
 
     @Override
-    public void addStep(int id, Step step) {
+    public void addGame(int id, Game game) {
         Player player = playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
-        System.out.println(player);
         assert player != null;
-        player.addStep(step);
+        player.addStep(game);
         playerRepository.save(player);
     }
 }

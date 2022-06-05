@@ -2,7 +2,7 @@ package com.tgc.bullsAndCows.controllers;
 
 
 import com.tgc.bullsAndCows.model.Player;
-import com.tgc.bullsAndCows.model.Step;
+import com.tgc.bullsAndCows.model.Game;
 import com.tgc.bullsAndCows.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +23,7 @@ public class MainController {
 
     @PostMapping("/addPlayer")
     public Player addNewPlayer(@RequestBody Player player) {
-        Player returnPlayer = playerService.savePlayer(player);
-        System.out.println(returnPlayer);
-        return returnPlayer;
+        return playerService.savePlayer(player);
     }
 
     @GetMapping("/getPlayer{id}")
@@ -44,8 +42,11 @@ public class MainController {
     }
 
     @PostMapping("/addStepToPlayer{playerId}")
-    public String addStepToPlayer(@PathVariable int playerId, @RequestBody Step step) {
-        playerService.addStep(playerId, step);
+    public String addGameToPlayer(@PathVariable int playerId, @RequestBody Game game) {
+        playerService.addGame(playerId, game);
         return "new step for player has been added";
     }
+
+//    @GetMapping("/{id}")
+//    public int mainGame
 }
