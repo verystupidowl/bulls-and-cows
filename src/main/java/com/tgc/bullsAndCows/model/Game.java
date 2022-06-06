@@ -3,6 +3,7 @@ package com.tgc.bullsAndCows.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "GAME")
@@ -25,6 +26,10 @@ public class Game {
     @Column(name = "is_guessed")
     private int isGuessed;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "game_id")
+    private List<Step> steps;
+
     public Game(int stepCount, int time, int answer, int isGuessed) {
         this.stepCount = stepCount;
         this.time = time;
@@ -32,7 +37,8 @@ public class Game {
         this.isGuessed = isGuessed;
     }
 
-    public void addStep() {
+    public void addStep(Step step) {
         setStepCount(stepCount += 1);
+        steps.add(step);
     }
 }

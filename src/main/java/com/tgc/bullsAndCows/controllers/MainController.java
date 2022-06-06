@@ -53,7 +53,11 @@ public class MainController {
 
     @GetMapping("/startGame{id}")
     public Game startGame(@PathVariable int id) {
-        Game game = playerService.addGame(id, new Game(0, 0, (int) (Math.random() * 10000), 0));
+        int answer = 0;
+        while (String.valueOf(answer).length() < 4) {
+            answer = (int) (Math.random() * 10000);
+        }
+        Game game = playerService.addGame(id, new Game(0, 0, answer, 0));
         System.out.println(game);
         return game;
     }

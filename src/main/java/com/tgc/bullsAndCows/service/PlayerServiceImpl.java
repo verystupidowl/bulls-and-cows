@@ -1,7 +1,9 @@
 package com.tgc.bullsAndCows.service;
 
+import com.tgc.bullsAndCows.MainGame;
 import com.tgc.bullsAndCows.model.Game;
 import com.tgc.bullsAndCows.model.Player;
+import com.tgc.bullsAndCows.model.Step;
 import com.tgc.bullsAndCows.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,7 +67,11 @@ public class PlayerServiceImpl implements PlayerService {
     public Game addStep(int id, Game game) {
         Player player = playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
         assert player != null;
-        Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == game.getId()).findAny().orElse(null)).addStep();
+        Step step;
+        Game rightGame = Objects.requireNonNull(player.getGames().stream()
+                .filter(g -> g.getId() == game.getId()).findAny().orElse(null));
+        step = MainGame.mainGame(game.getAnswer(), rightGame.getAnswer());
+        Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == game.getId()).findAny().orElse(null)).addStep(step);
         playerRepository.save(player);
         return Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == game.getId()).findAny().orElse(null));
     }
