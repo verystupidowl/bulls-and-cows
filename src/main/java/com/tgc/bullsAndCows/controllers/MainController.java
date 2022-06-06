@@ -1,8 +1,8 @@
 package com.tgc.bullsAndCows.controllers;
 
 
-import com.tgc.bullsAndCows.model.Player;
 import com.tgc.bullsAndCows.model.Game;
+import com.tgc.bullsAndCows.model.Player;
 import com.tgc.bullsAndCows.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +41,20 @@ public class MainController {
         return playerService.deletePlayer(id);
     }
 
-    @PostMapping("/addStepToPlayer{playerId}")
-    public String addGameToPlayer(@PathVariable int playerId, @RequestBody Game game) {
-        playerService.addGame(playerId, game);
-        return "new step for player has been added";
+    @PostMapping("/addStepToGame/{playerId}")
+    public Game addGameToPlayer(@PathVariable int playerId, @RequestBody Game game) {
+        System.out.println(game);
+        Game returnGame = playerService.addStep(playerId, game);
+        if (returnGame.getAnswer() == game.getAnswer()) {
+            returnGame.setIsGuessed(1);
+        }
+        return returnGame;
+    }
+
+    @GetMapping("/startGame{id}")
+    public Game startGame(@PathVariable int id) {
+        Game game = playerService.addGame(id, new Game(0, 0, (int) (Math.random() * 10000), 0));
+        System.out.println(game);
+        return game;
     }
 }

@@ -21,7 +21,7 @@ public class Player {
     @JoinColumn(name = "player_id")
     private List<Game> games;
 
-    public void addStep(Game game) {
+    public void addGame(Game game) {
         games.add(game);
     }
 }

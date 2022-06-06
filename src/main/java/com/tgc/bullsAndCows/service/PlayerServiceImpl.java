@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
@@ -28,7 +29,6 @@ public class PlayerServiceImpl implements PlayerService {
             playerRepository.save(player);
             return player;
         } else {
-            player1.addStep(new Game(22, 2222222, 242565));
             playerRepository.save(player1);
             return player1;
         }
@@ -53,10 +53,20 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void addGame(int id, Game game) {
+    public Game addGame(int id, Game game) {
         Player player = playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
         assert player != null;
-        player.addStep(game);
+        player.addGame(game);
         playerRepository.save(player);
+        return player.getGames().get(player.getGames().size() - 1);
+    }
+
+    @Override
+    public Game addStep(int id, Game game) {
+        Player player = playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
+        assert player != null;
+        Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == game.getId()).findAny().orElse(null)).addStep();
+        playerRepository.save(player);
+        return Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == game.getId()).findAny().orElse(null));
     }
 }

@@ -22,10 +22,17 @@ public class Game {
     private int time;
     @Column(name = "ANSWER")
     private int answer;
+    @Column(name = "is_guessed")
+    private int isGuessed;
 
-    public Game(int stepCount, int time, int answer) {
+    public Game(int stepCount, int time, int answer, int isGuessed) {
         this.stepCount = stepCount;
         this.time = time;
         this.answer = answer;
+        this.isGuessed = isGuessed;
+    }
+
+    public void addStep() {
+        setStepCount(stepCount += 1);
     }
 }

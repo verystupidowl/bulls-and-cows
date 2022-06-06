@@ -10,5 +10,6 @@ public interface PlayerService {
     Player findPlayer(int id);
     List<Player> getAllPlayers();
     Player deletePlayer(int id);
-    void addGame(int id, Game game);
+    Game addGame(int id, Game game);
+    Game addStep(int id, Game game);
 }
