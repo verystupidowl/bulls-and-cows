@@ -20,9 +20,12 @@ public class Game {
     private int stepCount;
     @Column(name = "TIME")
     private int time;
+    @Column(name = "ANSWER")
+    private int answer;
 
-    public Game(int stepCount, int time) {
+    public Game(int stepCount, int time, int answer) {
         this.stepCount = stepCount;
         this.time = time;
+        this.answer = answer;
     }
 }

@@ -46,7 +46,4 @@ public class MainController {
         playerService.addGame(playerId, game);
         return "new step for player has been added";
     }
-
-//    @GetMapping("/{id}")
-//    public int mainGame
 }

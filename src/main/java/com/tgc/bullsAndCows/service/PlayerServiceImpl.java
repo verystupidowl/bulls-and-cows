@@ -1,12 +1,11 @@
 package com.tgc.bullsAndCows.service;
 
-import com.tgc.bullsAndCows.model.Player;
 import com.tgc.bullsAndCows.model.Game;
+import com.tgc.bullsAndCows.model.Player;
 import com.tgc.bullsAndCows.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,7 +28,7 @@ public class PlayerServiceImpl implements PlayerService {
             playerRepository.save(player);
             return player;
         } else {
-            player1.addStep(new Game(22, 2222222));
+            player1.addStep(new Game(22, 2222222, 242565));
             playerRepository.save(player1);
             return player1;
         }
