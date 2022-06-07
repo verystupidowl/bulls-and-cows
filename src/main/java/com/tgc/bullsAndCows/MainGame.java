@@ -21,6 +21,6 @@ public class MainGame {
                 bulls++;
         }
         cows = cows - bulls;
-        return new Step(cows, bulls);
+        return new Step(cows, bulls, answer);
     }
 }

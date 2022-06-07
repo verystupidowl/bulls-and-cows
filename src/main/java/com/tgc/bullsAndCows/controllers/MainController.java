@@ -23,6 +23,7 @@ public class MainController {
 
     @PostMapping("/addPlayer")
     public Player addNewPlayer(@RequestBody Player player) {
+        System.out.println(player);
         return playerService.savePlayer(player);
     }
 
@@ -45,7 +46,7 @@ public class MainController {
     public Game addGameToPlayer(@PathVariable int playerId, @RequestBody Game game) {
         System.out.println(game);
         Game returnGame = playerService.addStep(playerId, game);
-        if (returnGame.getAnswer() == game.getAnswer()) {
+        if (returnGame.getRightAnswer() == game.getRightAnswer()) {
             returnGame.setIsGuessed(1);
         }
         return returnGame;

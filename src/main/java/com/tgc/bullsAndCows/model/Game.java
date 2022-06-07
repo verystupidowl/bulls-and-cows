@@ -21,8 +21,8 @@ public class Game {
     private int stepCount;
     @Column(name = "TIME")
     private int time;
-    @Column(name = "ANSWER")
-    private int answer;
+    @Column(name = "RIGHT_ANSWER")
+    private int rightAnswer;
     @Column(name = "is_guessed")
     private int isGuessed;
 
@@ -30,10 +30,10 @@ public class Game {
     @JoinColumn(name = "game_id")
     private List<Step> steps;
 
-    public Game(int stepCount, int time, int answer, int isGuessed) {
+    public Game(int stepCount, int time, int rightAnswer, int isGuessed) {
         this.stepCount = stepCount;
         this.time = time;
-        this.answer = answer;
+        this.rightAnswer = rightAnswer;
         this.isGuessed = isGuessed;
     }
 

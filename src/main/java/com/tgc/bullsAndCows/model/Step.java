@@ -22,9 +22,11 @@ public class Step {
     private int id;
     private int cows;
     private int bulls;
+    private int answer;
 
-    public Step(int cows, int bulls) {
+    public Step(int cows, int bulls, int answer) {
         this.cows = cows;
         this.bulls = bulls;
+        this.answer = answer;
     }
 }
