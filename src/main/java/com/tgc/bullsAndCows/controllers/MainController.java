@@ -56,7 +56,6 @@ public class MainController {
         while (String.valueOf(answer).length() < 4) {
             answer = (int) (Math.random() * 10000);
         }
-        Game game = playerService.addGame(id, new Game(0, 0, answer, 0));
-        return game;
+        return playerService.addGame(id, new Game(0, 0, answer, 0));
     }
 }
