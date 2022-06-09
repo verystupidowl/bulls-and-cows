@@ -3,6 +3,7 @@ package com.tgc.bullsAndCows.controllers;
 
 import com.tgc.bullsAndCows.model.Game;
 import com.tgc.bullsAndCows.model.Player;
+import com.tgc.bullsAndCows.model.Step;
 import com.tgc.bullsAndCows.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,10 @@ public class MainController {
 
     @PostMapping("/addPlayer")
     public Player addNewPlayer(@RequestBody Player player) {
-        return playerService.savePlayer(player);
+        System.out.println(player);
+        Player player1 = playerService.savePlayer(player);
+        System.out.println(player1);
+        return player1;
     }
 
     @GetMapping("/getPlayer{id}")
@@ -42,9 +46,11 @@ public class MainController {
     }
 
     @PostMapping("/addStepToGame/{playerId}")
-    public Game addGameToPlayer(@PathVariable int playerId, @RequestBody Game game) {
-        Game returnGame = playerService.addStep(playerId, game);
-        if (returnGame.getRightAnswer() == game.getRightAnswer()) {
+    public Game addGameToPlayer(@PathVariable int playerId, @RequestBody Step step) {
+        System.out.println(step);
+        Game returnGame = playerService.addStep(playerId, step);
+        System.out.println(returnGame);
+        if (returnGame.getRightAnswer() == step.getAnswer()) {
             returnGame.setIsGuessed(1);
         }
         return returnGame;
@@ -56,6 +62,6 @@ public class MainController {
         while (String.valueOf(answer).length() < 4) {
             answer = (int) (Math.random() * 10000);
         }
-        return playerService.addGame(id, new Game(0, 0, answer, 0));
+        return playerService.addGame(id, new Game(answer, 0));
     }
 }

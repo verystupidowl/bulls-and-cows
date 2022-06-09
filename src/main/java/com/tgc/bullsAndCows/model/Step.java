@@ -1,9 +1,6 @@
 package com.tgc.bullsAndCows.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +12,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Step {
 
     @Id
@@ -23,10 +21,12 @@ public class Step {
     private int cows;
     private int bulls;
     private int answer;
+    private int time;
 
-    public Step(int cows, int bulls, int answer) {
+    public Step(int cows, int bulls, int answer, int time) {
         this.cows = cows;
         this.bulls = bulls;
         this.answer = answer;
+        this.time =  time;
     }
 }

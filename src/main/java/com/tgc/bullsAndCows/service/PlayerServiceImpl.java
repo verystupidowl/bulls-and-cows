@@ -64,15 +64,14 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Game addStep(int id, Game game) {
+    public Game addStep(int id, Step step) {
         Player player = playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
         assert player != null;
-        Step step;
-        Game rightGame = Objects.requireNonNull(player.getGames().stream()
-                .filter(g -> g.getId() == game.getId()).findAny().orElse(null));
-        step = MainGame.mainGame(game.getRightAnswer(), rightGame.getRightAnswer());
-        Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == game.getId()).findAny().orElse(null)).addStep(step);
+        Step step1;
+        Game rightGame = player.getGames().get(player.getGames().size() - 1);
+        step1 = MainGame.mainGame(step, rightGame.getRightAnswer());
+        Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == step.getId()).findAny().orElse(null)).addStep(step1);
         playerRepository.save(player);
-        return Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == game.getId()).findAny().orElse(null));
+        return Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == step.getId()).findAny().orElse(null));
     }
 }

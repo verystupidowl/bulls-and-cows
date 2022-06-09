@@ -4,8 +4,8 @@ import com.tgc.bullsAndCows.model.Step;
 
 public class MainGame {
 
-    public static Step mainGame(int answer, int rightAnswer) {
-        char[] answerChar = String.valueOf(answer).toCharArray();
+    public static Step mainGame(Step step, int rightAnswer) {
+        char[] answerChar = String.valueOf(step.getAnswer()).toCharArray();
         char[] rightAnswerChar = String.valueOf(rightAnswer).toCharArray();
         int bulls = 0;
         int cows = 0;
@@ -21,6 +21,6 @@ public class MainGame {
                 bulls++;
         }
         cows = cows - bulls;
-        return new Step(cows, bulls, answer);
+        return new Step(cows, bulls, step.getAnswer(), step.getTime());
     }
 }
