@@ -21,9 +21,9 @@ public class Step {
     private int cows;
     private int bulls;
     private int answer;
-    private int time;
+    private long time;
 
-    public Step(int cows, int bulls, int answer, int time) {
+    public Step(int cows, int bulls, int answer, long time) {
         this.cows = cows;
         this.bulls = bulls;
         this.answer = answer;

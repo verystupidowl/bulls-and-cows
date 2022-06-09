@@ -25,15 +25,19 @@ public class Game {
     @Value("${limitation}")
     @Column(name = "limitation")
     private String limitation;
+    @Column(name = "start_time")
+    private long startTime;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "game_id")
     @ToString.Exclude
     private List<Step> steps;
 
-    public Game(int rightAnswer, int isGuessed) {
+    public Game(int rightAnswer, int isGuessed, String limitation, long startTime) {
         this.rightAnswer = rightAnswer;
         this.isGuessed = isGuessed;
+        this.limitation = limitation;
+        this.startTime = startTime;
     }
 
     public void addStep(Step step) {

@@ -60,6 +60,7 @@ public class PlayerServiceImpl implements PlayerService {
         assert player != null;
         player.addGame(game);
         playerRepository.save(player);
+        System.out.println(player);
         return player.getGames().get(player.getGames().size() - 1);
     }
 

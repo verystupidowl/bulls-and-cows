@@ -2,6 +2,8 @@ package com.tgc.bullsAndCows;
 
 import com.tgc.bullsAndCows.model.Step;
 
+import java.util.Date;
+
 public class MainGame {
 
     public static Step mainGame(Step step, int rightAnswer) {
@@ -21,6 +23,6 @@ public class MainGame {
                 bulls++;
         }
         cows = cows - bulls;
-        return new Step(cows, bulls, step.getAnswer(), step.getTime());
+        return new Step(cows, bulls, step.getAnswer(), new Date().getTime());
     }
 }
