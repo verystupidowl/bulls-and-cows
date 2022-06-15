@@ -1,7 +1,7 @@
 package com.tgc.bullsAndCows.model;
 
+import com.tgc.bullsAndCows.ConfigUnit;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,9 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "GAME")
 @NoArgsConstructor
-@Getter
 @Setter
-@ToString
+@Getter
 @AllArgsConstructor
 public class Game {
 
@@ -22,7 +21,7 @@ public class Game {
     private int rightAnswer;
     @Column(name = "is_guessed")
     private int isGuessed;
-    @Value("${limitation}")
+//    @Value("${limitation}")
     @Column(name = "limitation")
     private String limitation;
     @Column(name = "start_time")
@@ -38,6 +37,13 @@ public class Game {
         this.isGuessed = isGuessed;
         this.limitation = limitation;
         this.startTime = startTime;
+    }
+
+    public Game(int rightAnswer, int isGuessed, long startTime) {
+        this.rightAnswer = rightAnswer;
+        this.isGuessed = isGuessed;
+        this.startTime = startTime;
+        this.limitation = ConfigUnit.getProperty();
     }
 
     public void addStep(Step step) {
