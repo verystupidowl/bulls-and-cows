@@ -30,14 +30,27 @@ public class MainController {
 
     @GetMapping("/getTimer{id}")
     public Long getTimer(@PathVariable int id) {
-        if (!playerService.findPlayer(id).getGames().isEmpty()) {
-            long end = playerService.findPlayer(id)
-                    .getGames().get(playerService.findPlayer(id).getGames().size() - 1)
-//                    .getStartTime() + 300000;
-                    .getStartTime() + 30000;
-            return end - new Date().getTime() > 0 ? end - new Date().getTime() : (long) 0;
+        Player player = playerService.findPlayer(id);
+        if (!player.getGames().isEmpty()) {
+            Game game = player.getGames().get(player.getGames().size() - 1);
+            switch (game.getLimitation()) {
+                case "time": {
+                    long end = game
+                            .getStartTime() + 300000;
+//                    .getStartTime() + 10000;
+                    return end - new Date().getTime() > 0 ? end - new Date().getTime() : (long) -1;
+                }
+                case "steps": {
+                    long end = 10;
+                    return end - game.getSteps().size() > 0 ? end - game.getSteps().size() : (long) -1;
+                }
+                case "without":
+                    return (long) -2;
+                default:
+                    return (long) -3;
+            }
         } else
-            return (long) 0;
+            return (long) -100;
     }
 
     @GetMapping("/getPlayer{id}")
@@ -70,6 +83,6 @@ public class MainController {
         while (String.valueOf(answer).length() < 4) {
             answer = (int) (Math.random() * 10000);
         }
-        return playerService.addGame(id, new Game(answer, 0, "without", new Date().getTime()));
+        return playerService.addGame(id, new Game(answer, 0, "steps", new Date().getTime()));
     }
 }
