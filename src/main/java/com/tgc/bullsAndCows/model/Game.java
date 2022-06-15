@@ -1,6 +1,6 @@
 package com.tgc.bullsAndCows.model;
 
-import com.tgc.bullsAndCows.ConfigUnit;
+import com.tgc.bullsAndCows.ConfigLimitation;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @Getter
 @AllArgsConstructor
+@ToString
 public class Game {
 
     @Id
@@ -32,18 +33,18 @@ public class Game {
     @ToString.Exclude
     private List<Step> steps;
 
-    public Game(int rightAnswer, int isGuessed, String limitation, long startTime) {
-        this.rightAnswer = rightAnswer;
-        this.isGuessed = isGuessed;
-        this.limitation = limitation;
-        this.startTime = startTime;
-    }
+//    public Game(int rightAnswer, int isGuessed, String limitation, long startTime) {
+//        this.rightAnswer = rightAnswer;
+//        this.isGuessed = isGuessed;
+//        this.limitation = limitation;
+//        this.startTime = startTime;
+//    }
 
     public Game(int rightAnswer, int isGuessed, long startTime) {
         this.rightAnswer = rightAnswer;
         this.isGuessed = isGuessed;
         this.startTime = startTime;
-        this.limitation = ConfigUnit.getProperty();
+        this.limitation = ConfigLimitation.getProperty();
     }
 
     public void addStep(Step step) {

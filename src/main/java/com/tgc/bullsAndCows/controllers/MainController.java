@@ -36,8 +36,8 @@ public class MainController {
             switch (game.getLimitation()) {
                 case "time": {
                     long end = game
-                            .getStartTime() + 300000;
-//                    .getStartTime() + 10000;
+//                            .getStartTime() + 300000;
+                    .getStartTime() + 10000;
                     return end - new Date().getTime() > 0 ? end - new Date().getTime() : (long) -1;
                 }
                 case "steps": {

@@ -5,13 +5,13 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConfigUnit {
+public class ConfigLimitation {
 
     private static Environment environment;
 
     @Autowired
-    public ConfigUnit(Environment environment) {
-        ConfigUnit.environment = environment;
+    public ConfigLimitation(Environment environment) {
+        ConfigLimitation.environment = environment;
     }
 
     public static String getProperty() {
