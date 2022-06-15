@@ -11,5 +11,3 @@ public class BullsAndCowsApplication {
 		SpringApplication.run(BullsAndCowsApplication.class, args);
 	}
 }
-
-//TODO: исправить баг с коровами

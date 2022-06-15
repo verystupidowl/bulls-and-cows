@@ -57,11 +57,9 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Game addGame(int id, Game game) {
         Player player = findPlayer(id);
-        System.out.println(game);
         assert player != null;
         player.addGame(game);
         playerRepository.save(player);
-        System.out.println(player);
         return player.getGames().get(player.getGames().size() - 1);
     }
 
