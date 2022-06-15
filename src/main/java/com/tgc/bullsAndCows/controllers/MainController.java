@@ -83,6 +83,6 @@ public class MainController {
         while (String.valueOf(answer).length() < 4) {
             answer = (int) (Math.random() * 10000);
         }
-        return playerService.addGame(id, new Game(answer, 0, "steps", new Date().getTime()));
+        return playerService.addGame(id, new Game(answer, 0, "time", new Date().getTime()));
     }
 }

@@ -48,7 +48,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player deletePlayer(int id) {
-        Player deletedPlayer = playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
+        Player deletedPlayer = findPlayer(id);
         assert deletedPlayer != null;
         playerRepository.delete(deletedPlayer);
         return deletedPlayer;
@@ -56,7 +56,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Game addGame(int id, Game game) {
-        Player player = playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
+        Player player = findPlayer(id);
         assert player != null;
         player.addGame(game);
         playerRepository.save(player);
@@ -66,7 +66,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Game addStep(int id, Step step) {
-        Player player = playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null);
+        Player player = findPlayer(id);
         assert player != null;
         Step step1;
         Game rightGame = player.getGames().get(player.getGames().size() - 1);
