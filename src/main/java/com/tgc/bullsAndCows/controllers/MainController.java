@@ -28,6 +28,18 @@ public class MainController {
         return playerService.savePlayer(player);
     }
 
+    @GetMapping("/getTimer{id}")
+    public Long getTimer(@PathVariable int id) {
+        if (!playerService.findPlayer(id).getGames().isEmpty()) {
+            long end = playerService.findPlayer(id)
+                    .getGames().get(playerService.findPlayer(id).getGames().size() - 1)
+//                    .getStartTime() + 300000;
+                    .getStartTime() + 30000;
+            return end - new Date().getTime() > 0 ? end - new Date().getTime() : (long) 0;
+        } else
+            return (long) 0;
+    }
+
     @GetMapping("/getPlayer{id}")
     public Player getPlayer(@PathVariable int id) {
         return playerService.findPlayer(id);
@@ -58,7 +70,6 @@ public class MainController {
         while (String.valueOf(answer).length() < 4) {
             answer = (int) (Math.random() * 10000);
         }
-        System.out.println(new Game(answer, 0, "without", new Date().getTime()));
         return playerService.addGame(id, new Game(answer, 0, "without", new Date().getTime()));
     }
 }
