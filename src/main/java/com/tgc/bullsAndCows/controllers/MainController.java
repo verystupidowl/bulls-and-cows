@@ -28,7 +28,7 @@ public class MainController {
         return playerService.savePlayer(player);
     }
 
-    @GetMapping("/getTimer{id}")
+    @GetMapping("/getLimit{id}")
     public Long getTimer(@PathVariable int id) {
         Player player = playerService.findPlayer(id);
         if (!player.getGames().isEmpty()) {
