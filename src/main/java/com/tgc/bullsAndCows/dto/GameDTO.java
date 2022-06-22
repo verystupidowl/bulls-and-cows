@@ -1,5 +1,6 @@
 package com.tgc.bullsAndCows.dto;
 
+import com.tgc.bullsAndCows.model.Limitation;
 import lombok.Data;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public class GameDTO {
     private int id;
     private int rightAnswer;
     private int isGuessed;
-    private String limitation;
+    private Limitation limitation;
     private long startTime;
     private List<StepDTO> steps;
 }

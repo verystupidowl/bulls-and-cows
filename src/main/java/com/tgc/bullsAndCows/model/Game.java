@@ -25,7 +25,7 @@ public class Game {
     private int isGuessed;
 //    @Value("${limitation}")
     @Column(name = "limitation")
-    private String limitation;
+    private Limitation limitation;
     @Column(name = "start_time")
     private long startTime;
 
@@ -47,7 +47,7 @@ public class Game {
         this.limitation = ConfigLimitation.getProperty();
     }
 
-    public Game(int rightAnswer, int isGuessed, String limitation, long startTime, List<Step> steps) {
+    public Game(int rightAnswer, int isGuessed, Limitation limitation, long startTime, List<Step> steps) {
         this.rightAnswer = rightAnswer;
         this.isGuessed = isGuessed;
         this.startTime = startTime;

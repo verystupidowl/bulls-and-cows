@@ -33,20 +33,22 @@ public class MainController {
         if (!playerDTO.getGames().isEmpty()) {
             GameDTO gameDTO = playerDTO.getGames().get(playerDTO.getGames().size() - 1);
             switch (gameDTO.getLimitation()) {
-                case "time": {
+                case TIME: {
                     long end = gameDTO
                             .getStartTime() + 300000;
 //                    .getStartTime() + 10000;
                     return end - new Date().getTime() > 0 ? end - new Date().getTime() : (long) -1;
                 }
-                case "steps": {
+                case STEPS: {
                     long end = 10;
                     return end - gameDTO.getSteps().size() > 0 ? end - gameDTO.getSteps().size() : (long) -1;
                 }
-                case "without":
+                case WITHOUT: {
                     return (long) -2;
-                default:
+                }
+                default: {
                     return (long) -3;
+                }
             }
         } else
             return (long) -100;

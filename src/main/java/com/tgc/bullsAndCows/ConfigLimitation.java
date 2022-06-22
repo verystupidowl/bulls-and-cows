@@ -1,8 +1,11 @@
 package com.tgc.bullsAndCows;
 
+import com.tgc.bullsAndCows.model.Limitation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 @Component
 public class ConfigLimitation {
@@ -14,7 +17,16 @@ public class ConfigLimitation {
         ConfigLimitation.environment = environment;
     }
 
-    public static String getProperty() {
-        return environment.getProperty("limitation");
+    public static Limitation getProperty() {
+        switch (Objects.requireNonNull(environment.getProperty("limitation"))) {
+            case "time" :
+                return Limitation.TIME;
+            case "without" :
+                return Limitation.WITHOUT;
+            case "steps" :
+                return Limitation.STEPS;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 }
