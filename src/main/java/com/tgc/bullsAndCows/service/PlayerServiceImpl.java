@@ -64,10 +64,8 @@ public class PlayerServiceImpl implements PlayerService {
         MainGame mainGame = new MainGame();
         Player player = mappingUtils.mapToPlayerEntity(findPlayer(id));
         player.setId(id);
-        System.out.println(player);
         Step step1;
         Game rightGame = player.getGames().get(player.getGames().size() - 1);
-        System.out.println(rightGame);
         mainGame.mainGame(step.getAnswer(), rightGame.getRightAnswer());
         step1 = new Step(mainGame.getCows(), mainGame.getBulls(), step.getAnswer(), new Date().getTime());
         Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == rightGame.getId()).findAny().orElse(null)).addStep(step1);
