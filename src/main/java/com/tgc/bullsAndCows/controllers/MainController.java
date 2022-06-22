@@ -36,7 +36,6 @@ public class MainController {
                 case TIME: {
                     long end = gameDTO
                             .getStartTime() + 300000;
-//                    .getStartTime() + 10000;
                     return end - new Date().getTime() > 0 ? end - new Date().getTime() : (long) -1;
                 }
                 case STEPS: {

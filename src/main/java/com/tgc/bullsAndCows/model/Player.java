@@ -16,7 +16,9 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "player_id")
     private List<Game> games;
