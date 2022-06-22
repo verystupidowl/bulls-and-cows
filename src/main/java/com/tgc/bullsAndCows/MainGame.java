@@ -6,13 +6,13 @@ import java.util.Date;
 
 public class MainGame {
 
-    public static Step mainGame(Step step, int rightAnswer) {
+    public static Step mainGame(int answer, int rightAnswer) {
         int bulls = 0, cows = 0;
 
-        StringBuilder answerBuilder = new StringBuilder(String.valueOf(step.getAnswer()));
+        StringBuilder answerBuilder = new StringBuilder(String.valueOf(answer));
         StringBuilder rightAnswerBuilder = new StringBuilder(String.valueOf(rightAnswer));
 
-        String answerString = String.valueOf(step.getAnswer());
+        String answerString = String.valueOf(answer);
         String rightAnswerString = String.valueOf(rightAnswer);
 
         for (int i = 0; i < 4; ++i) {
@@ -36,7 +36,7 @@ public class MainGame {
         }
 
 
-        return new Step(cows, bulls, step.getAnswer(), new Date().getTime());
+        return new Step(cows, bulls, answer, new Date().getTime());
     }
 
     private static int countBetween(char what, String where, int to) {

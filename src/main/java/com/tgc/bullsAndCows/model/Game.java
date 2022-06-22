@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "GAME")
@@ -45,6 +46,14 @@ public class Game {
         this.isGuessed = isGuessed;
         this.startTime = startTime;
         this.limitation = ConfigLimitation.getProperty();
+    }
+
+    public Game(int rightAnswer, int isGuessed, String limitation, long startTime, List<Step> steps) {
+        this.rightAnswer = rightAnswer;
+        this.isGuessed = isGuessed;
+        this.startTime = startTime;
+        this.limitation = limitation;
+        this.steps = steps;
     }
 
     public void addStep(Step step) {

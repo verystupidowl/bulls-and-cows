@@ -24,4 +24,9 @@ public class Player {
     public void addGame(Game game) {
         games.add(game);
     }
+
+    public Player(String name, List<Game> games) {
+        this.name = name;
+        this.games = games;
+    }
 }
