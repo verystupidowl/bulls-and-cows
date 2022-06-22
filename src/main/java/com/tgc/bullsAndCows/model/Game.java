@@ -31,7 +31,6 @@ public class Game {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "game_id")
-    @ToString.Exclude
     private List<Step> steps;
 
 //    public Game(int rightAnswer, int isGuessed, String limitation, long startTime) {

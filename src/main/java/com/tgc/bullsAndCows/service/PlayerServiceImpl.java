@@ -66,10 +66,21 @@ public class PlayerServiceImpl implements PlayerService {
         System.out.println(player);
         Step step1;
         Game rightGame = player.getGames().get(player.getGames().size() - 1);
+        System.out.println(rightGame);
         step1 = MainGame.mainGame(step.getAnswer(), rightGame.getRightAnswer());
-        Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == step.getId()).findAny().orElse(null)).addStep(step1);
+        Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == rightGame.getId()).findAny().orElse(null)).addStep(step1);
         playerRepository.save(player);
-        Game returnGame = Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == step.getId()).findAny().orElse(null));
+        Game returnGame = Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == rightGame.getId()).findAny().orElse(null));
         return mappingUtils.mapToGameDto(returnGame);
+    }
+
+    @Override
+    public GameDTO setIsGuessed(int id) {
+        Player player = mappingUtils.mapToPlayerEntity(findPlayer(id));
+        player.setId(id);
+        Game game = player.getGames().get(player.getGames().size() - 1);
+        game.setIsGuessed(1);
+        playerRepository.save(player);
+        return mappingUtils.mapToGameDto(game);
     }
 }

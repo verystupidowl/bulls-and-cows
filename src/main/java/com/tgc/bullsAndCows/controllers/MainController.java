@@ -64,10 +64,10 @@ public class MainController {
     }
 
     @PostMapping("/addStepToGame/{playerId}")
-    public GameDTO addGameToPlayer(@PathVariable int playerId, @RequestBody StepDTO step) {
-        GameDTO returnGame = playerService.addStep(playerId, step);
-        if (returnGame.getRightAnswer() == step.getAnswer()) {
-            returnGame.setIsGuessed(1);
+    public GameDTO addGameToPlayer(@PathVariable int playerId, @RequestBody StepDTO stepDTO) {
+        GameDTO returnGame = playerService.addStep(playerId, stepDTO);
+        if (returnGame.getRightAnswer() == stepDTO.getAnswer()) {
+            returnGame = playerService.setIsGuessed(playerId);
         }
         return returnGame;
     }

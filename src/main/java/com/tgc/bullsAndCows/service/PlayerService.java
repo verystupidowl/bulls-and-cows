@@ -12,4 +12,5 @@ public interface PlayerService {
     List<PlayerDTO> getAllPlayers();
     GameDTO addGame(int id, int answer);
     GameDTO addStep(int id, StepDTO step);
+    GameDTO setIsGuessed(int id);
 }

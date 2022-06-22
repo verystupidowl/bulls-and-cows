@@ -24,7 +24,7 @@ public class MappingUtils {
     }
 
     public Step mapToStepEntity(StepDTO dto) {
-        return new Step(dto.getCows(), dto.getBulls(), dto.getAnswer(), dto.getTime());
+        return new Step(dto.getId(), dto.getCows(), dto.getBulls(), dto.getAnswer(), dto.getTime());
     }
 
     public GameDTO mapToGameDto(Game game) {
@@ -43,6 +43,7 @@ public class MappingUtils {
 
     public Game mapToGameEntity(GameDTO dto) {
         return new Game(
+                dto.getId(),
                 dto.getRightAnswer(),
                 dto.getIsGuessed(),
                 dto.getLimitation(),
