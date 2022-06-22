@@ -1,13 +1,16 @@
 package com.tgc.bullsAndCows;
 
-import com.tgc.bullsAndCows.model.Step;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-import java.util.Date;
-
+@Component
+@Scope("prototype")
 public class MainGame {
 
-    public static Step mainGame(int answer, int rightAnswer) {
-        int bulls = 0, cows = 0;
+    private int cows = 0;
+    private int bulls = 0;
+
+    public void mainGame(int answer, int rightAnswer) {
 
         StringBuilder answerBuilder = new StringBuilder(String.valueOf(answer));
         StringBuilder rightAnswerBuilder = new StringBuilder(String.valueOf(rightAnswer));
@@ -34,9 +37,6 @@ public class MainGame {
                     && countLeft < countInComputerNumber)
                 cows++;
         }
-
-
-        return new Step(cows, bulls, answer, new Date().getTime());
     }
 
     private static int countBetween(char what, String where, int to) {
@@ -46,5 +46,21 @@ public class MainGame {
                 count++;
         }
         return count;
+    }
+
+    public int getCows() {
+        return cows;
+    }
+
+    public void setCows(int cows) {
+        this.cows = cows;
+    }
+
+    public int getBulls() {
+        return bulls;
+    }
+
+    public void setBulls(int bulls) {
+        this.bulls = bulls;
     }
 }
