@@ -16,4 +16,4 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
-limitation: "steps"
+limitation: "without"

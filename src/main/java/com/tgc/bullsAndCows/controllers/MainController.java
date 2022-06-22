@@ -8,8 +8,7 @@ import com.tgc.bullsAndCows.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/game")
@@ -74,10 +73,15 @@ public class MainController {
 
     @GetMapping("/startGame{id}")
     public GameDTO startGame(@PathVariable int id) {
-        int answer = 0;
-        while (String.valueOf(answer).length() < 4) {
-            answer = (int) (Math.random() * 10000);
+        StringBuilder answer = new StringBuilder();
+        while (answer.length() < 4) {
+            List<Integer> integers = new ArrayList<>();
+            for (int i = 0; i < 10; i++)
+                integers.add(i);
+            Collections.shuffle(integers);
+            for (int i = 0; i < 4; i++)
+                answer.append(integers.get(i));
         }
-        return playerService.addGame(id, answer);
+        return playerService.addGame(id, Integer.parseInt(answer.toString()));
     }
 }
