@@ -1,7 +1,14 @@
-package com.tgc.bullsAndCows;
+package com.tgc.bullsAndCows.Utils;
 
+import lombok.Getter;
+import org.springframework.stereotype.Component;
 
-public class MainGame {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+@Getter
+public class GameUtils {
 
     private int cows = 0;
     private int bulls = 0;
@@ -44,19 +51,16 @@ public class MainGame {
         return count;
     }
 
-    public int getCows() {
-        return cows;
-    }
-
-    public void setCows(int cows) {
-        this.cows = cows;
-    }
-
-    public int getBulls() {
-        return bulls;
-    }
-
-    public void setBulls(int bulls) {
-        this.bulls = bulls;
+    public static int generateRandomNumber() {
+        StringBuilder answer = new StringBuilder();
+        while (answer.length() < 4) {
+            List<Integer> integers = new ArrayList<>();
+            for (int i = 0; i < 10; i++)
+                integers.add(i);
+            Collections.shuffle(integers);
+            for (int i = 0; i < 4; i++)
+                answer.append(integers.get(i));
+        }
+        return Integer.parseInt(answer.toString());
     }
 }

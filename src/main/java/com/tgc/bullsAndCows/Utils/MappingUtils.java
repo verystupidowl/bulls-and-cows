@@ -1,4 +1,4 @@
-package com.tgc.bullsAndCows.service;
+package com.tgc.bullsAndCows.Utils;
 
 import com.tgc.bullsAndCows.dto.GameDTO;
 import com.tgc.bullsAndCows.dto.PlayerDTO;
@@ -35,7 +35,8 @@ public class MappingUtils {
         dto.setSteps(game.getSteps() != null ?
                 game.getSteps().stream()
                         .map(this::mapToStepDto)
-                        .collect(Collectors.toList()) : null);
+                        .collect(Collectors.toList()) : null
+        );
         dto.setIsGuessed(game.getIsGuessed());
         dto.setLimitation(game.getLimitation());
         return dto;
@@ -61,8 +62,7 @@ public class MappingUtils {
         dto.setGames(player.getGames() != null ?
                 player.getGames().stream()
                         .map(this::mapToGameDto)
-                        .collect(Collectors.toList()) :
-                null
+                        .collect(Collectors.toList()) : null
         );
         return dto;
     }

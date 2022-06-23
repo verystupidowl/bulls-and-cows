@@ -1,4 +1,4 @@
-package com.tgc.bullsAndCows;
+package com.tgc.bullsAndCows.Utils;
 
 import com.tgc.bullsAndCows.model.Limitation;
 import org.springframework.beans.factory.annotation.Autowired;

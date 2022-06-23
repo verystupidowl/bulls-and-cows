@@ -1,6 +1,6 @@
 package com.tgc.bullsAndCows.model;
 
-import com.tgc.bullsAndCows.ConfigLimitation;
+import com.tgc.bullsAndCows.Utils.ConfigLimitation;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,6 +1,7 @@
 package com.tgc.bullsAndCows.service;
 
-import com.tgc.bullsAndCows.MainGame;
+import com.tgc.bullsAndCows.Utils.GameUtils;
+import com.tgc.bullsAndCows.Utils.MappingUtils;
 import com.tgc.bullsAndCows.dto.GameDTO;
 import com.tgc.bullsAndCows.dto.PlayerDTO;
 import com.tgc.bullsAndCows.dto.StepDTO;
@@ -61,13 +62,13 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public GameDTO addStep(int id, StepDTO step) {
-        MainGame mainGame = new MainGame();
+        GameUtils gameUtils = new GameUtils();
         Player player = mappingUtils.mapToPlayerEntity(findPlayer(id));
         player.setId(id);
         Step step1;
         Game rightGame = player.getGames().get(player.getGames().size() - 1);
-        mainGame.mainGame(step.getAnswer(), rightGame.getRightAnswer());
-        step1 = new Step(mainGame.getCows(), mainGame.getBulls(), step.getAnswer(), new Date().getTime());
+        gameUtils.mainGame(step.getAnswer(), rightGame.getRightAnswer());
+        step1 = new Step(gameUtils.getCows(), gameUtils.getBulls(), step.getAnswer(), new Date().getTime());
         Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == rightGame.getId()).findAny().orElse(null)).addStep(step1);
         playerRepository.save(player);
         Game returnGame = Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == rightGame.getId()).findAny().orElse(null));

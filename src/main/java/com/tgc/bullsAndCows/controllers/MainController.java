@@ -1,6 +1,7 @@
 package com.tgc.bullsAndCows.controllers;
 
 
+import com.tgc.bullsAndCows.Utils.GameUtils;
 import com.tgc.bullsAndCows.dto.GameDTO;
 import com.tgc.bullsAndCows.dto.PlayerDTO;
 import com.tgc.bullsAndCows.dto.StepDTO;
@@ -74,15 +75,6 @@ public class MainController {
 
     @GetMapping("/startGame{id}")
     public GameDTO startGame(@PathVariable int id) {
-        StringBuilder answer = new StringBuilder();
-        while (answer.length() < 4) {
-            List<Integer> integers = new ArrayList<>();
-            for (int i = 0; i < 10; i++)
-                integers.add(i);
-            Collections.shuffle(integers);
-            for (int i = 0; i < 4; i++)
-                answer.append(integers.get(i));
-        }
-        return playerService.addGame(id, Integer.parseInt(answer.toString()));
+        return playerService.addGame(id, GameUtils.generateRandomNumber());
     }
 }
