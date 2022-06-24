@@ -1,7 +1,6 @@
 package com.tgc.bullsAndCows.Utils;
 
 import lombok.Getter;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
