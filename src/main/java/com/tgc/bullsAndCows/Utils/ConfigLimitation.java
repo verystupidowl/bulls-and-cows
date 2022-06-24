@@ -19,11 +19,11 @@ public class ConfigLimitation {
 
     public static Limitation getProperty() {
         switch (Objects.requireNonNull(environment.getProperty("limitation"))) {
-            case "time" :
+            case "time":
                 return Limitation.TIME;
-            case "without" :
+            case "without":
                 return Limitation.WITHOUT;
-            case "steps" :
+            case "steps":
                 return Limitation.STEPS;
             default:
                 throw new IllegalArgumentException();

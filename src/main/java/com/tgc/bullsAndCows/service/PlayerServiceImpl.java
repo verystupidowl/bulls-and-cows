@@ -84,4 +84,30 @@ public class PlayerServiceImpl implements PlayerService {
         playerRepository.save(player);
         return mappingUtils.mapToGameDto(game);
     }
+
+    @Override
+    public Long getLimit(int id) {
+        PlayerDTO playerDTO = findPlayer(id);
+        if (!playerDTO.getGames().isEmpty()) {
+            GameDTO gameDTO = playerDTO.getGames().get(playerDTO.getGames().size() - 1);
+            switch (gameDTO.getLimitation()) {
+                case TIME: {
+                    long end = gameDTO
+                            .getStartTime() + 300000;
+                    return end - new Date().getTime() > 0 ? end - new Date().getTime() : (long) -1;
+                }
+                case STEPS: {
+                    long end = 10;
+                    return end - gameDTO.getSteps().size() > 0 ? end - gameDTO.getSteps().size() : (long) -1;
+                }
+                case WITHOUT: {
+                    return (long) -2;
+                }
+                default: {
+                    return (long) -3;
+                }
+            }
+        } else
+            return (long) -100;
+    }
 }

@@ -13,4 +13,5 @@ public interface PlayerService {
     GameDTO addGame(int id, int answer);
     GameDTO addStep(int id, StepDTO step);
     GameDTO setIsGuessed(int id);
+    Long getLimit(int id);
 }
