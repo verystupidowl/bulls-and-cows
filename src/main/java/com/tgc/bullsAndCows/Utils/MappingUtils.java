@@ -3,9 +3,9 @@ package com.tgc.bullsAndCows.Utils;
 import com.tgc.bullsAndCows.dto.GameDTO;
 import com.tgc.bullsAndCows.dto.PlayerDTO;
 import com.tgc.bullsAndCows.dto.StepDTO;
-import com.tgc.bullsAndCows.model.Game;
-import com.tgc.bullsAndCows.model.Player;
-import com.tgc.bullsAndCows.model.Step;
+import com.tgc.bullsAndCows.entity.Game;
+import com.tgc.bullsAndCows.entity.Player;
+import com.tgc.bullsAndCows.entity.Step;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;

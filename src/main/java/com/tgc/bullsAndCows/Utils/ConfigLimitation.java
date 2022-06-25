@@ -1,6 +1,6 @@
 package com.tgc.bullsAndCows.Utils;
 
-import com.tgc.bullsAndCows.model.Limitation;
+import com.tgc.bullsAndCows.entity.Limitation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;

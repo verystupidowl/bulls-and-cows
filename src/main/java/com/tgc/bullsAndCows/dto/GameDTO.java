@@ -1,6 +1,6 @@
 package com.tgc.bullsAndCows.dto;
 
-import com.tgc.bullsAndCows.model.Limitation;
+import com.tgc.bullsAndCows.entity.Limitation;
 import lombok.Data;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.tgc.bullsAndCows.model;
+package com.tgc.bullsAndCows.entity;
 
 import lombok.*;
 
@@ -27,6 +27,6 @@ public class Step {
         this.cows = cows;
         this.bulls = bulls;
         this.answer = answer;
-        this.time =  time;
+        this.time = time;
     }
 }

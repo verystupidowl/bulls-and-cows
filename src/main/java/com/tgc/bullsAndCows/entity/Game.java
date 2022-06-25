@@ -1,4 +1,4 @@
-package com.tgc.bullsAndCows.model;
+package com.tgc.bullsAndCows.entity;
 
 import com.tgc.bullsAndCows.Utils.ConfigLimitation;
 import lombok.*;

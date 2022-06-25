@@ -46,6 +46,7 @@ public class MainController {
     @PostMapping("/addStepToGame/{playerId}")
     public GameDTO addGameToPlayer(@PathVariable int playerId, @RequestBody StepDTO stepDTO) {
         GameDTO returnGame = playerService.addStep(playerId, stepDTO);
+        System.out.println(stepDTO);
         if (returnGame.getRightAnswer() == stepDTO.getAnswer()) {
             returnGame = playerService.setIsGuessed(playerId);
         }
