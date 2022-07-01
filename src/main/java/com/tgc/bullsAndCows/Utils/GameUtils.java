@@ -12,12 +12,12 @@ public class GameUtils {
     private int cows = 0;
     private int bulls = 0;
 
-    public void mainGame(int answer, int rightAnswer) {
+    public void getBullsAndCowsCount(int userAnswer, int rightAnswer) {
 
-        StringBuilder answerBuilder = new StringBuilder(String.valueOf(answer));
+        StringBuilder answerBuilder = new StringBuilder(String.valueOf(userAnswer));
         StringBuilder rightAnswerBuilder = new StringBuilder(String.valueOf(rightAnswer));
 
-        String answerString = String.valueOf(answer);
+        String answerString = String.valueOf(userAnswer);
         String rightAnswerString = String.valueOf(rightAnswer);
 
         for (int i = 0; i < 4; ++i) {
@@ -29,6 +29,7 @@ public class GameUtils {
         }
         answerString = answerBuilder.toString();
         rightAnswerString = rightAnswerBuilder.toString();
+
         for (int i = 0; i < 4; ++i) {
             if (answerString.charAt(i) == ' ')
                 continue;

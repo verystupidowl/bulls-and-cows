@@ -67,7 +67,7 @@ public class PlayerServiceImpl implements PlayerService {
         player.setId(id);
         Step step1;
         Game rightGame = player.getGames().get(player.getGames().size() - 1);
-        gameUtils.mainGame(step.getAnswer(), rightGame.getRightAnswer());
+        gameUtils.getBullsAndCowsCount(step.getAnswer(), rightGame.getRightAnswer());
         step1 = new Step(gameUtils.getCows(), gameUtils.getBulls(), step.getAnswer(), new Date().getTime());
         Objects.requireNonNull(player.getGames().stream().filter(g -> g.getId() == rightGame.getId()).findAny().orElse(null)).addStep(step1);
         playerRepository.save(player);

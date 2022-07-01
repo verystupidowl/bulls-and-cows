@@ -32,7 +32,8 @@ public class MappingUtils {
         dto.setStartTime(game.getStartTime());
         dto.setId(game.getId());
         dto.setRightAnswer(game.getRightAnswer());
-        dto.setSteps(game.getSteps() != null ?
+        dto.setSteps(
+                game.getSteps() != null ?
                 game.getSteps().stream()
                         .map(this::mapToStepDto)
                         .collect(Collectors.toList()) : null
@@ -59,7 +60,8 @@ public class MappingUtils {
         PlayerDTO dto = new PlayerDTO();
         dto.setId(player.getId());
         dto.setName(player.getName());
-        dto.setGames(player.getGames() != null ?
+        dto.setGames(
+                player.getGames() != null ?
                 player.getGames().stream()
                         .map(this::mapToGameDto)
                         .collect(Collectors.toList()) : null
