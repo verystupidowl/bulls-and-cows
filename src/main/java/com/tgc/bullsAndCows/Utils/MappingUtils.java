@@ -34,9 +34,9 @@ public class MappingUtils {
         dto.setRightAnswer(game.getRightAnswer());
         dto.setSteps(
                 game.getSteps() != null ?
-                game.getSteps().stream()
-                        .map(this::mapToStepDto)
-                        .collect(Collectors.toList()) : null
+                        game.getSteps().stream()
+                                .map(this::mapToStepDto)
+                                .collect(Collectors.toList()) : null
         );
         dto.setIsGuessed(game.getIsGuessed());
         dto.setLimitation(game.getLimitation());
@@ -62,9 +62,9 @@ public class MappingUtils {
         dto.setName(player.getName());
         dto.setGames(
                 player.getGames() != null ?
-                player.getGames().stream()
-                        .map(this::mapToGameDto)
-                        .collect(Collectors.toList()) : null
+                        player.getGames().stream()
+                                .map(this::mapToGameDto)
+                                .collect(Collectors.toList()) : null
         );
         return dto;
     }
