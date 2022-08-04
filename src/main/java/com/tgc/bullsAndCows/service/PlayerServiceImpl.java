@@ -1,7 +1,9 @@
 package com.tgc.bullsAndCows.service;
 
 import com.tgc.bullsAndCows.Utils.GameUtils;
+import com.tgc.bullsAndCows.Utils.LimitException;
 import com.tgc.bullsAndCows.Utils.MappingUtils;
+import com.tgc.bullsAndCows.Utils.PlayerNotFoundException;
 import com.tgc.bullsAndCows.dto.GameDTO;
 import com.tgc.bullsAndCows.dto.PlayerDTO;
 import com.tgc.bullsAndCows.dto.StepDTO;
@@ -42,7 +44,11 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerDTO findPlayer(int id) {
-        return mappingUtils.mapToPlayerDto(Objects.requireNonNull(playerRepository.findAll().stream().filter(p -> p.getId() == id).findAny().orElse(null)));
+        return mappingUtils.mapToPlayerDto(playerRepository
+                .findAll().stream()
+                .filter(p -> p.getId() == id)
+                .findAny()
+                .orElseThrow(() -> new PlayerNotFoundException("Player with this ID didn't found!")));
     }
 
     @Override
@@ -91,23 +97,21 @@ public class PlayerServiceImpl implements PlayerService {
         if (!playerDTO.getGames().isEmpty()) {
             GameDTO gameDTO = playerDTO.getGames().get(playerDTO.getGames().size() - 1);
             switch (gameDTO.getLimitation()) {
-                case TIME: {
+                case TIME -> {
                     long end = gameDTO
                             .getStartTime() + 300000;
                     return end - new Date().getTime() > 0 ? end - new Date().getTime() : (long) -1;
                 }
-                case STEPS: {
+                case STEPS -> {
                     long end = 10;
                     return end - gameDTO.getSteps().size() > 0 ? end - gameDTO.getSteps().size() : (long) -1;
                 }
-                case WITHOUT: {
+                case WITHOUT -> {
                     return (long) -2;
                 }
-                default: {
-                    return (long) -3;
-                }
+                default -> throw new LimitException("Incorrect limitation data!");
             }
         } else
-            return (long) -100;
+            throw new LimitException("Incorrect limitation data!");
     }
 }
