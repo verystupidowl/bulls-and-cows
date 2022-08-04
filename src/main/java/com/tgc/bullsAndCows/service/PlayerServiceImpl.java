@@ -96,22 +96,20 @@ public class PlayerServiceImpl implements PlayerService {
         PlayerDTO playerDTO = findPlayer(id);
         if (!playerDTO.getGames().isEmpty()) {
             GameDTO gameDTO = playerDTO.getGames().get(playerDTO.getGames().size() - 1);
-            switch (gameDTO.getLimitation()) {
+            System.out.println(gameDTO);
+            return switch (gameDTO.getLimitation()) {
                 case TIME -> {
                     long end = gameDTO
                             .getStartTime() + 300000;
-                    return end - new Date().getTime() > 0 ? end - new Date().getTime() : (long) -1;
+                    yield end - new Date().getTime() > 0 ? end - new Date().getTime() : (long) -1;
                 }
                 case STEPS -> {
                     long end = 10;
-                    return end - gameDTO.getSteps().size() > 0 ? end - gameDTO.getSteps().size() : (long) -1;
+                    yield end - gameDTO.getSteps().size() > 0 ? end - gameDTO.getSteps().size() : (long) -1;
                 }
-                case WITHOUT -> {
-                    return (long) -2;
-                }
-                default -> throw new LimitException("Incorrect limitation data!");
-            }
+                case WITHOUT -> (long) -2;
+            };
         } else
-            throw new LimitException("Incorrect limitation data!");
+            return (long) -100;
     }
 }
