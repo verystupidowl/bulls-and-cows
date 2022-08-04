@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,12 +33,12 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerDTO savePlayer(PlayerDTO player) {
-        Player player1 = playerRepository.findAll().stream().filter(p -> p.getName().equals(player.getName())).findAny().orElse(null);
-        if (player1 == null) {
+        Optional<Player> player1 = playerRepository.findAll().stream().filter(p -> p.getName().equals(player.getName())).findAny();
+        if (player1.isEmpty()) {
             return mappingUtils.mapToPlayerDto(playerRepository.save(mappingUtils.mapToPlayerEntity(player)));
         } else {
-            playerRepository.save(player1);
-            return mappingUtils.mapToPlayerDto(player1);
+            playerRepository.save(player1.get());
+            return mappingUtils.mapToPlayerDto(player1.get());
         }
     }
 
