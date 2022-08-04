@@ -1,7 +1,6 @@
 package com.tgc.bullsAndCows.service;
 
 import com.tgc.bullsAndCows.Utils.GameUtils;
-import com.tgc.bullsAndCows.Utils.LimitException;
 import com.tgc.bullsAndCows.Utils.MappingUtils;
 import com.tgc.bullsAndCows.Utils.PlayerNotFoundException;
 import com.tgc.bullsAndCows.dto.GameDTO;
@@ -96,7 +95,6 @@ public class PlayerServiceImpl implements PlayerService {
         PlayerDTO playerDTO = findPlayer(id);
         if (!playerDTO.getGames().isEmpty()) {
             GameDTO gameDTO = playerDTO.getGames().get(playerDTO.getGames().size() - 1);
-            System.out.println(gameDTO);
             return switch (gameDTO.getLimitation()) {
                 case TIME -> {
                     long end = gameDTO

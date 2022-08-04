@@ -9,7 +9,6 @@ import com.tgc.bullsAndCows.dto.GameDTO;
 import com.tgc.bullsAndCows.dto.PlayerDTO;
 import com.tgc.bullsAndCows.dto.StepDTO;
 import com.tgc.bullsAndCows.service.PlayerService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +22,10 @@ import java.util.List;
 public class MainController {
 
     private final PlayerService playerService;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public MainController(PlayerService playerService, ModelMapper modelMapper) {
+    public MainController(PlayerService playerService) {
         this.playerService = playerService;
-        this.modelMapper = modelMapper;
     }
 
     @PostMapping("/addPlayer")
@@ -54,7 +51,6 @@ public class MainController {
     @PostMapping("/addStepToGame/{playerId}")
     public GameDTO addGameToPlayer(@PathVariable int playerId, @RequestBody StepDTO stepDTO) {
         GameDTO returnGame = playerService.addStep(playerId, stepDTO);
-        System.out.println(stepDTO);
         if (returnGame.getRightAnswer() == stepDTO.getAnswer()) {
             returnGame = playerService.setIsGuessed(playerId);
         }
