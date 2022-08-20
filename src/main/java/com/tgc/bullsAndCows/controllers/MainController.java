@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,11 +29,18 @@ public class MainController {
     }
 
     @PostMapping("/addPlayer")
-    public PlayerDTO addNewPlayer(@RequestBody PlayerDTO playerDTO, BindingResult bindingResult) {
-        System.out.println(playerDTO);
-        System.out.println(bindingResult);
-        if (bindingResult.hasErrors())
-            throw new PlayerNotCreatedException(bindingResult.getAllErrors().toString());
+    public PlayerDTO addNewPlayer(@RequestBody @Valid PlayerDTO playerDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMsg = new StringBuilder();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errorMsg
+                        .append(error.getField())
+                        .append(" - ")
+                        .append(error.getDefaultMessage())
+                        .append(";");
+            }
+            throw new PlayerNotCreatedException(errorMsg.toString());
+        }
         return playerService.savePlayer(playerDTO);
     }
 
