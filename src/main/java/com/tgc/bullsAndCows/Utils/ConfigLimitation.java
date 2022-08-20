@@ -22,7 +22,7 @@ public class ConfigLimitation {
             case "time" -> Limitation.TIME;
             case "without" -> Limitation.WITHOUT;
             case "steps" -> Limitation.STEPS;
-            default -> throw new LimitException("Incorrect limitation data");
+            default -> throw new LimitException("Incorrect limitation data! Check your property source file!");
         };
     }
 }

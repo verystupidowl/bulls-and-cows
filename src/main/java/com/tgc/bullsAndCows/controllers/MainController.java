@@ -1,10 +1,7 @@
 package com.tgc.bullsAndCows.controllers;
 
 
-import com.tgc.bullsAndCows.Utils.GameUtils;
-import com.tgc.bullsAndCows.Utils.LimitException;
-import com.tgc.bullsAndCows.Utils.PlayerErrorResponse;
-import com.tgc.bullsAndCows.Utils.PlayerNotFoundException;
+import com.tgc.bullsAndCows.Utils.*;
 import com.tgc.bullsAndCows.dto.GameDTO;
 import com.tgc.bullsAndCows.dto.PlayerDTO;
 import com.tgc.bullsAndCows.dto.StepDTO;
@@ -12,6 +9,7 @@ import com.tgc.bullsAndCows.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +27,11 @@ public class MainController {
     }
 
     @PostMapping("/addPlayer")
-    public PlayerDTO addNewPlayer(@RequestBody PlayerDTO playerDTO) {
+    public PlayerDTO addNewPlayer(@RequestBody PlayerDTO playerDTO, BindingResult bindingResult) {
+        System.out.println(playerDTO);
+        System.out.println(bindingResult);
+        if (bindingResult.hasErrors())
+            throw new PlayerNotCreatedException(bindingResult.getAllErrors().toString());
         return playerService.savePlayer(playerDTO);
     }
 
@@ -67,7 +69,7 @@ public class MainController {
         var response = new PlayerErrorResponse(
                 e.getMessage(), System.currentTimeMillis()
         );
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler
@@ -76,5 +78,13 @@ public class MainController {
                 e.getMessage(), System.currentTimeMillis()
         );
         return new ResponseEntity<>(playerErrorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<PlayerErrorResponse> exceptionHAndler(PlayerNotCreatedException e) {
+        var playerErrorResponse = new PlayerErrorResponse(
+                e.getMessage(), System.currentTimeMillis()
+        );
+        return new ResponseEntity<>(playerErrorResponse, HttpStatus.BAD_REQUEST);
     }
 }
