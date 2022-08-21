@@ -19,12 +19,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/game")
 @CrossOrigin("http://localhost:3000/")
-public class MainController {
+public class GameController {
 
     private final PlayerService playerService;
 
     @Autowired
-    public MainController(PlayerService playerService) {
+    public GameController(PlayerService playerService) {
         this.playerService = playerService;
     }
 
