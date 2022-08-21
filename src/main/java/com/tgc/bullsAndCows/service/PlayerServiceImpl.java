@@ -33,7 +33,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerDTO savePlayer(PlayerDTO player) {
-        Optional<Player> player1 = playerRepository.findAll().stream().filter(p -> p.getName().equals(player.getName())).findAny();
+        Optional<Player> player1 = playerRepository.findByName(player.getName());
         if (player1.isEmpty()) {
             return mappingUtils.mapToPlayerDto(playerRepository.save(mappingUtils.mapToPlayerEntity(player)));
         } else {

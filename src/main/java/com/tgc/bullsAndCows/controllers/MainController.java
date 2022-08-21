@@ -31,15 +31,8 @@ public class MainController {
     @PostMapping("/addPlayer")
     public PlayerDTO addNewPlayer(@RequestBody @Valid PlayerDTO playerDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            StringBuilder errorMsg = new StringBuilder();
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errorMsg
-                        .append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
-                        .append(";");
-            }
-            throw new PlayerNotCreatedException(errorMsg.toString());
+            String errorMsg = errorMsgBuilder(bindingResult.getFieldErrors());
+            throw new PlayerNotCreatedException(errorMsg);
         }
         return playerService.savePlayer(playerDTO);
     }
@@ -71,6 +64,18 @@ public class MainController {
     @GetMapping("/startGame{id}")
     public GameDTO startGame(@PathVariable int id) {
         return playerService.addGame(id, GameUtils.generateRandomNumber());
+    }
+
+    private String errorMsgBuilder(List<FieldError> errors) {
+        StringBuilder errorMsg = new StringBuilder();
+        for (FieldError error : errors) {
+            errorMsg
+                    .append(error.getField())
+                    .append(" - ")
+                    .append(error.getDefaultMessage())
+                    .append(";");
+        }
+        return errorMsg.toString();
     }
 
     @ExceptionHandler
