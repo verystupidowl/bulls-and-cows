@@ -1,9 +1,9 @@
 package com.tgc.bullsAndCows.entity;
 
 import com.tgc.bullsAndCows.Utils.ConfigLimitation;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Entity

@@ -16,7 +16,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
-limitation: "time"
+limitation: "steps"
 
 #steps - limit on attempts
 #time - limit on time

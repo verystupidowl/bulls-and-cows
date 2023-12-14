@@ -1,8 +1,8 @@
 package com.tgc.bullsAndCows.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Entity
