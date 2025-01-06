@@ -1,22 +1,24 @@
+server:
+  servlet:
+    context-path: /bullsandcows
 spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
-    h2:
-      console:
-        enabled: true
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/bulls-and-cows
+    username: root
+    password: root
   jpa:
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: create-drop
     generate-ddl: true
     show-sql: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-limitation: "steps"
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+secret:
+  key: A1Bpk31LCairKHoJsB1Agv/MBXfd+1ifXFDXLyv4BYvPdQHs9ebAUu52bt7YIta
+limitation: time
 
 #steps - limit on attempts
 #time - limit on time

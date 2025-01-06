@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: player.sql
+      relativeToChangelogFile: true
+  - include:
+      file: game.sql
+      relativeToChangelogFile: true
+  - include:
+      file: step.sql
+      relativeToChangelogFile: true
+  - include:
+      file: fill_tables.sql
+      relativeToChangelogFile: true
